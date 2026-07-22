@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edits App</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" defer></script>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <h1>Edits App</h1>
+      <p class="subtitle">Overlay automático con opacidad inteligente</p>
+    </header>
+
+    <!-- Step 1: Select images -->
+    <section id="step-images" class="step active">
+      <h2>1. Seleccionar imágenes</h2>
+      <div class="drop-zone" id="dropZoneImages">
+        <input type="file" id="imageFiles" multiple accept="image/*" hidden>
+        <div class="drop-content">
+          <span class="icon">+</span>
+          <p>Arrastra imágenes aquí o haz clic para seleccionar</p>
+          <button class="btn" id="btnSelectImages">Seleccionar imágenes</button>
+        </div>
+      </div>
+      <div class="thumb-grid" id="imageThumbs"></div>
+      <div class="step-actions">
+        <button class="btn btn-primary" id="btnNextOverlay" disabled>Siguiente</button>
+      </div>
+    </section>
+
+    <!-- Step 2: Select overlay -->
+    <section id="step-overlay" class="step">
+      <h2>2. Seleccionar overlay</h2>
+      <p class="info">Elige una imagen que se superpondrá sobre todas las fotos.</p>
+      <div class="drop-zone small" id="dropZoneOverlay">
+        <input type="file" id="overlayFile" accept="image/*" hidden>
+        <div class="drop-content">
+          <span class="icon">&#127912;</span>
+          <p>Overlay (una imagen)</p>
+          <button class="btn" id="btnSelectOverlay">Elegir overlay</button>
+        </div>
+      </div>
+      <div class="overlay-preview" id="overlayPreview"></div>
+      <div class="step-actions">
+        <button class="btn" id="btnBackImages">Atrás</button>
+        <button class="btn btn-primary" id="btnProcess" disabled>Procesar</button>
+      </div>
+    </section>
+
+    <!-- Step 3: Results -->
+    <section id="step-results" class="step">
+      <div id="resultsGrid">
+        <h2>3. Resultados</h2>
+        <div class="progress-bar-container" id="progressContainer" hidden>
+          <div class="progress-bar"><div class="progress-bar-fill" id="progressBarFill"></div></div>
+          <span id="progressText">0 / 0</span>
+        </div>
+        <p class="info">Haz clic en una miniatura para ajustar opacidad y filtro.</p>
+        <div class="thumb-grid" id="resultThumbs"></div>
+        <div class="step-actions save-actions">
+          <button class="btn" id="btnBackOverlay">Atrás</button>
+          <button class="btn btn-primary" id="btnSaveZip" disabled>Descargar ZIP</button>
+          <button class="btn" id="btnSaveIndividual" disabled>Descargar una por una</button>
+        </div>
+      </div>
+
+      <div id="resultEditor" hidden>
+        <h2>Editar</h2>
+        <div class="editor-layout">
+          <div class="editor-preview" id="editorPreview"></div>
+          <div class="editor-controls">
+            <div class="slider-group">
+              <label for="opacitySlider">Opacidad del overlay</label>
+              <div class="slider-row">
+                <input type="range" id="opacitySlider" min="0" max="100" value="50">
+                <span id="opacityValue">50%</span>
+              </div>
+            </div>
+
+            <div class="filter-group">
+              <label>Filtro de base</label>
+              <div class="filter-grid" id="filterGrid">
+                <button class="filter-btn" data-filter="auto">Auto</button>
+                <button class="filter-btn" data-filter="none">Ninguno</button>
+                <button class="filter-btn" data-filter="brightness">Brillo</button>
+                <button class="filter-btn" data-filter="warm">Cálido</button>
+                <button class="filter-btn" data-filter="cool">Frío</button>
+                <button class="filter-btn" data-filter="vintage">Vintage</button>
+                <button class="filter-btn" data-filter="vibrant">Vibrante</button>
+                <button class="filter-btn" data-filter="bw">B&N</button>
+                <button class="filter-btn" data-filter="soft">Suave</button>
+              </div>
+              <p class="filter-auto-info" id="filterAutoInfo"></p>
+            </div>
+
+            <div class="editor-info">
+              <p>Opacidad auto: <span id="editorAutoOpacity"></span></p>
+              <button class="btn btn-primary" id="btnDownloadOne" style="width:100%;margin-top:12px">Descargar esta imagen</button>
+            </div>
+          </div>
+        </div>
+        <div class="step-actions">
+          <button class="btn" id="btnBackGrid">Volver a resultados</button>
+        </div>
+      </div>
+    </section>
+
+    <div id="statusBar" hidden>
+      <span id="statusText"></span>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

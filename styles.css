@@ -110,6 +110,26 @@ h2 {
   cursor: not-allowed;
 }
 
+.btn-secondary {
+  background: #4a3f5a;
+  color: #e0e0e0;
+}
+
+.btn-secondary:hover { background: #5a4f6a; }
+
+.btn-process {
+  background: #2d7d46;
+  color: #fff;
+}
+
+.btn-process:hover { background: #3a9d56; }
+
+.btn-process:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
 /* ─── Thumb grid ─────────────────────────── */
 .thumb-grid {
   display: grid;
@@ -202,6 +222,7 @@ h2 {
 
 /* ─── Overlay preview ────────────────────── */
 .overlay-preview {
+  position: relative;
   text-align: center;
   margin-top: 16px;
 }
@@ -211,6 +232,22 @@ h2 {
   max-height: 200px;
   border-radius: 8px;
   border: 2px solid #444;
+}
+
+.overlay-preview .remove-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: none;
+  background: #e74c3c;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
 }
 
 /* ─── Step actions ───────────────────────── */
@@ -280,15 +317,59 @@ h2 {
   align-items: flex-start;
 }
 
-.editor-preview {
+.editor-preview-wrap {
   flex: 1;
   max-width: 500px;
+  position: relative;
+}
+
+.editor-preview {
+  width: 100%;
+}
+
+.editor-preview.draggable {
+  touch-action: none;
 }
 
 .editor-preview img {
   width: 100%;
   border-radius: 12px;
   border: 2px solid #333;
+  display: block;
+}
+
+/* ─── Drag hint overlay ──────────────────── */
+.drag-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0,0,0,0.7);
+  color: #ccc;
+  font-size: 12px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  white-space: nowrap;
+}
+
+.editor-preview-wrap:hover .drag-hint,
+.drag-hint:not([hidden]) {
+  opacity: 1;
+}
+
+.editor-preview.draggable + .drag-hint {
+  animation: pulse-hint 2s ease-in-out 3;
+}
+
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0; }
+  40%, 60% { opacity: 1; }
 }
 
 .editor-controls {
@@ -377,12 +458,15 @@ h2 {
 }
 
 .filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
   background: #222;
   color: #aaa;
   border: 1px solid #333;
   border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 12px;
+  padding: 5px 9px;
+  font-size: 11px;
   cursor: pointer;
   transition: background 0.15s, color 0.15s, border-color 0.15s;
 }
@@ -402,6 +486,15 @@ h2 {
   font-size: 12px;
   color: #555;
   margin-top: 6px;
+}
+
+/* ─── Drag hint ──────────────────────────── */
+.editor-preview.draggable {
+  cursor: grab;
+}
+
+.editor-preview.draggable:active {
+  cursor: grabbing;
 }
 
 /* ─── Responsive ─────────────────────────── */

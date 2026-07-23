@@ -2,16 +2,40 @@ const FILTER_LABELS = {
   auto: 'Auto', none: 'Ninguno', brightness: 'Brillo',
   warm: 'Cálido', cool: 'Frío', vintage: 'Vintage',
   vibrant: 'Vibrante', bw: 'B&N', soft: 'Suave',
+  drama: 'Drama', neon: 'Neón', retro: 'Retro',
+  hdr: 'HDR', dreamy: 'Soñado',
 };
 
 const FILTER_CSS = {
-  brightness: 'brightness(1.2) contrast(1.15)',
-  warm: 'sepia(0.25) saturate(1.3) hue-rotate(-15deg) brightness(1.05)',
-  cool: 'saturate(0.9) hue-rotate(25deg) brightness(1.05)',
-  vintage: 'sepia(0.5) saturate(0.8) brightness(1.1) contrast(0.9)',
-  vibrant: 'saturate(1.8) brightness(1.05)',
-  bw: 'grayscale(1) brightness(1.1) contrast(1.1)',
-  soft: 'brightness(1.1) contrast(0.95) saturate(0.9) blur(0.5px)',
+  brightness: 'brightness(1.5) contrast(1.35) saturate(1.15)',
+  warm: 'sepia(0.45) saturate(1.6) hue-rotate(-20deg) brightness(1.05) contrast(1.1)',
+  cool: 'saturate(0.7) hue-rotate(35deg) brightness(1.1) contrast(1.25)',
+  vintage: 'sepia(0.75) saturate(0.5) brightness(1.15) contrast(0.8)',
+  vibrant: 'saturate(2.5) brightness(1.1) contrast(1.15)',
+  bw: 'grayscale(1) brightness(1.15) contrast(1.4)',
+  soft: 'brightness(1.15) contrast(0.85) saturate(0.8) blur(1px)',
+  drama: 'contrast(1.7) saturate(1.5) brightness(0.85)',
+  neon: 'hue-rotate(70deg) saturate(3) brightness(1.25) contrast(1.1)',
+  retro: 'sepia(0.65) saturate(0.6) brightness(0.9) contrast(0.8) hue-rotate(-10deg)',
+  hdr: 'contrast(1.8) saturate(1.6) brightness(1.2)',
+  dreamy: 'brightness(1.25) contrast(0.8) saturate(1.15) blur(1.5px)',
+};
+
+const FILTER_ICONS = {
+  auto: '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2l1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5z" fill="currentColor"/></svg>',
+  none: '<svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><line x1="5" y1="5" x2="19" y2="19" stroke="currentColor" stroke-width="2"/></svg>',
+  brightness: '<svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="4" fill="currentColor"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  warm: '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 3c-1.5 3-5 4.5-5 8.5 0 2.76 2.24 5 5 5s5-2.24 5-5c0-4-3.5-5.5-5-8.5z" fill="currentColor"/></svg>',
+  cool: '<svg viewBox="0 0 24 24" width="14" height="14"><line x1="12" y1="2" x2="12" y2="22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="2" y1="12" x2="22" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="19.07" y1="4.93" x2="4.93" y2="19.07" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  vintage: '<svg viewBox="0 0 24 24" width="14" height="14"><rect x="3" y="7" width="18" height="12" rx="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="13" r="1.5" fill="currentColor"/><rect x="5" y="8" width="3" height="2" rx="0.5" fill="currentColor"/></svg>',
+  vibrant: '<svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="3 2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2"/><circle cx="12" cy="12" r="2" fill="currentColor"/></svg>',
+  bw: '<svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="9" fill="currentColor"/><path d="M12 3a9 9 0 0 1 0 18v-18z" fill="#222"/></svg>',
+  soft: '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M18 10.5A4.5 4.5 0 0 0 13.5 6a5.5 5.5 0 0 0-5 3A3.5 3.5 0 0 0 6 16h11a4 4 0 0 0 1-7.5z" fill="currentColor"/></svg>',
+  drama: '<svg viewBox="0 0 24 24" width="14" height="14"><polygon points="13,2 4,14 12,14 11,22 20,10 12,10" fill="currentColor"/></svg>',
+  neon: '<svg viewBox="0 0 24 24" width="14" height="14"><polygon points="12,2 22,12 12,22 2,12" fill="none" stroke="currentColor" stroke-width="2"/><polygon points="12,6 18,12 12,18 6,12" fill="currentColor" opacity="0.5"/></svg>',
+  retro: '<svg viewBox="0 0 24 24" width="14" height="14"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8" cy="12" r="2.5" fill="currentColor"/><circle cx="16" cy="12" r="2.5" fill="currentColor"/><rect x="9.5" y="10.5" width="5" height="3" rx="0.5" fill="none" stroke="currentColor" stroke-width="1"/></svg>',
+  hdr: '<svg viewBox="0 0 24 24" width="14" height="14"><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5.64 5.64l2.12 2.12M16.24 16.24l2.12 2.12M5.64 18.36l2.12-2.12M16.24 7.76l2.12-2.12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+  dreamy: '<svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 2l1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5z" fill="currentColor" opacity="0.7"/><circle cx="8" cy="6" r="1" fill="currentColor" opacity="0.4"/><circle cx="18" cy="7" r="0.8" fill="currentColor" opacity="0.3"/><circle cx="7" cy="17" r="0.6" fill="currentColor" opacity="0.4"/></svg>',
 };
 
 const state = {
@@ -43,6 +67,7 @@ const opacityValue = $('#opacityValue');
 const editorAutoOpacity = $('#editorAutoOpacity');
 const filterGrid = $('#filterGrid');
 const filterAutoInfo = $('#filterAutoInfo');
+
 
 function showStep(id) {
   $$('.step').forEach(el => el.classList.remove('active'));
@@ -108,8 +133,19 @@ function updateImageButton() {
 async function handleOverlayFile(file) {
   if (!file || !file.type.startsWith('image/')) return;
   state.overlay = await loadImageFromFile(file);
-  overlayPreview.innerHTML = `<img src="${state.overlay.dataUrl}" alt="overlay">`;
+  overlayPreview.innerHTML = `
+    <div style="position:relative;display:inline-block">
+      <img src="${state.overlay.dataUrl}" alt="overlay">
+      <button class="remove-btn" id="removeOverlayBtn">&times;</button>
+    </div>`;
   $('#btnProcess').disabled = false;
+  $('#removeOverlayBtn').addEventListener('click', removeOverlay);
+}
+
+function removeOverlay() {
+  state.overlay = null;
+  overlayPreview.innerHTML = '';
+  $('#btnProcess').disabled = true;
 }
 
 function cropToSquare(img) {
@@ -200,25 +236,31 @@ function detectBestFilter(baseImg) {
   const warmth = (avgR - avgB) / 255;
 
   if (avgBrightness < 0.3) return 'brightness';
-  if (avgSat < 0.12) return 'vibrant';
+  if (avgSat < 0.08) return 'neon';
+  if (avgSat < 0.12) return 'drama';
   if (warmth > 0.15) return 'warm';
   if (warmth < -0.1) return 'cool';
   if (avgSat > 0.3 && avgBrightness > 0.6) return 'vintage';
+  if (avgSat > 0.25 && avgBrightness > 0.65) return 'hdr';
   if (avgBrightness < 0.5) return 'soft';
+  if (avgBrightness > 0.7 && avgSat < 0.2) return 'dreamy';
+  if (warmth > 0.05 && avgSat < 0.2) return 'retro';
   return 'none';
 }
 
-function composite(baseImg, overlayImg, opacity, filterType) {
-  const canvas = document.createElement('canvas');
+function composite(baseImg, overlayImg, opacity, filterType, panX = 0, panY = 0) {
   const size = Math.min(baseImg.width, baseImg.height);
+  const maxPanX = Math.max(0, (baseImg.width - size) / 2);
+  const maxPanY = Math.max(0, (baseImg.height - size) / 2);
+  const offsetX = maxPanX * (1 + panX);
+  const offsetY = maxPanY * (1 + panY);
+
+  const canvas = document.createElement('canvas');
   canvas.width = size;
   canvas.height = size;
-
   const ctx = canvas.getContext('2d');
 
-  const baseOffsetX = (baseImg.width - size) / 2;
-  const baseOffsetY = (baseImg.height - size) / 2;
-  ctx.drawImage(baseImg, baseOffsetX, baseOffsetY, size, size, 0, 0, size, size);
+  ctx.drawImage(baseImg, offsetX, offsetY, size, size, 0, 0, size, size);
 
   applyFilterToCanvas(canvas, size, size, filterType || 'none');
 
@@ -271,6 +313,8 @@ async function processAll() {
       opacity,
       filter: 'none',
       autoFilter,
+      panX: 0,
+      panY: 0,
     });
   }
 
@@ -279,6 +323,23 @@ async function processAll() {
   hideStatus();
   $('#btnSaveZip').disabled = false;
   $('#btnSaveIndividual').disabled = false;
+}
+
+function resetToStep1() {
+  state.images = [];
+  state.overlay = null;
+  state.results = [];
+  state.editingIndex = -1;
+  imageThumbs.innerHTML = '';
+  overlayPreview.innerHTML = '';
+  resultThumbs.innerHTML = '';
+  updateImageButton();
+  $('#btnProcess').disabled = true;
+  showStep('images');
+  hideStatus();
+  progressContainer.hidden = true;
+  resultsGrid.hidden = false;
+  resultEditor.hidden = true;
 }
 
 function getEffectiveFilter(result) {
@@ -301,6 +362,14 @@ function openEditor(index) {
   filterAutoInfo.textContent = 'Auto detectado: ' + autoLabel;
 
   updateFilterUI(result.filter);
+
+  const size = Math.min(result.baseImg.width, result.baseImg.height);
+  const maxPanX = Math.max(0, (result.baseImg.width - size) / 2);
+  const maxPanY = Math.max(0, (result.baseImg.height - size) / 2);
+  const canDrag = maxPanX > 0 || maxPanY > 0;
+  editorPreview.classList.toggle('draggable', canDrag);
+  dragHint.hidden = !canDrag;
+
   renderEditorPreview(result);
 }
 
@@ -314,7 +383,7 @@ async function closeEditor() {
 
 function renderEditorPreview(result) {
   const effective = getEffectiveFilter(result);
-  const canvas = composite(result.baseImg, result.overlayImg, result.opacity, effective);
+  const canvas = composite(result.baseImg, result.overlayImg, result.opacity, effective, result.panX || 0, result.panY || 0);
   const dataUrl = canvas.toDataURL('image/png');
   editorPreview.innerHTML = `<img src="${dataUrl}" alt="preview">`;
 }
@@ -348,7 +417,7 @@ async function applyEditorChanges() {
 
   const result = state.results[index];
   const effective = getEffectiveFilter(result);
-  const canvas = composite(result.baseImg, result.overlayImg, result.opacity, effective);
+  const canvas = composite(result.baseImg, result.overlayImg, result.opacity, effective, result.panX || 0, result.panY || 0);
   const dataUrl = canvas.toDataURL('image/png');
 
   const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
@@ -379,6 +448,15 @@ function renderResultThumbs() {
       downloadIndividual(parseInt(btn.dataset.index));
     });
   });
+}
+
+function renderFilterGrid() {
+  const order = ['auto', 'none', 'brightness', 'warm', 'cool', 'vintage', 'vibrant', 'bw', 'soft', 'drama', 'neon', 'retro', 'hdr', 'dreamy'];
+  filterGrid.innerHTML = order.map(key => `
+    <button class="filter-btn" data-filter="${key}">
+      ${FILTER_ICONS[key] || ''} ${FILTER_LABELS[key]}
+    </button>
+  `).join('');
 }
 
 function downloadIndividual(index) {
@@ -489,4 +567,70 @@ filterGrid.addEventListener('click', (e) => {
   if (btn) selectFilter(btn.dataset.filter);
 });
 
+$('#btnReset').addEventListener('click', resetToStep1);
+
+const dragHint = $('#dragHint');
+
+function tryStartDrag(clientX, clientY) {
+  if (state.editingIndex === -1) return false;
+  const result = state.results[state.editingIndex];
+  const size = Math.min(result.baseImg.width, result.baseImg.height);
+  const maxPanX = Math.max(0, (result.baseImg.width - size) / 2);
+  const maxPanY = Math.max(0, (result.baseImg.height - size) / 2);
+  if (maxPanX === 0 && maxPanY === 0) return false;
+
+  isDragging = true;
+  dragStartX = clientX;
+  dragStartY = clientY;
+  dragPanX = result.panX || 0;
+  dragPanY = result.panY || 0;
+  return true;
+}
+
+function tryMoveDrag(clientX, clientY) {
+  if (!isDragging || state.editingIndex === -1) return;
+  const result = state.results[state.editingIndex];
+  const size = Math.min(result.baseImg.width, result.baseImg.height);
+  const maxPanX = Math.max(0, (result.baseImg.width - size) / 2);
+  const maxPanY = Math.max(0, (result.baseImg.height - size) / 2);
+
+  const dx = clientX - dragStartX;
+  const dy = clientY - dragStartY;
+
+  if (maxPanX > 0) result.panX = Math.max(-1, Math.min(1, dragPanX - dx / maxPanX));
+  if (maxPanY > 0) result.panY = Math.max(-1, Math.min(1, dragPanY - dy / maxPanY));
+
+  renderEditorPreview(result);
+}
+
+function tryEndDrag() {
+  isDragging = false;
+}
+
+let isDragging = false;
+let dragStartX = 0, dragStartY = 0;
+let dragPanX = 0, dragPanY = 0;
+
+editorPreview.addEventListener('mousedown', (e) => {
+  if (tryStartDrag(e.clientX, e.clientY)) e.preventDefault();
+});
+
+document.addEventListener('mousemove', (e) => {
+  tryMoveDrag(e.clientX, e.clientY);
+});
+
+document.addEventListener('mouseup', tryEndDrag);
+
+editorPreview.addEventListener('touchstart', (e) => {
+  if (tryStartDrag(e.touches[0].clientX, e.touches[0].clientY)) e.preventDefault();
+}, { passive: false });
+
+editorPreview.addEventListener('touchmove', (e) => {
+  tryMoveDrag(e.touches[0].clientX, e.touches[0].clientY);
+  if (isDragging) e.preventDefault();
+}, { passive: false });
+
+editorPreview.addEventListener('touchend', tryEndDrag);
+
+renderFilterGrid();
 hideStatus();
